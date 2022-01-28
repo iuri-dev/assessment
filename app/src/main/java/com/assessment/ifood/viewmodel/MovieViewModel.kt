@@ -3,6 +3,7 @@ package com.assessment.ifood.viewmodel
 import androidx.lifecycle.ViewModel
 import com.assessment.ifood.data.repository.MovieRepository
 import com.assessment.ifood.domain.Movie
+import com.assessment.ifood.domain.PageRequest
 import com.assessment.ifood.domain.ResponseWrapper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -17,8 +18,8 @@ class MovieViewModel @Inject constructor(
 
     val loadedMovies = MutableStateFlow<List<Movie>>(listOf())
 
-    fun fetchPopularMovies(page: Int, language: String) =
-        movieRepository.fetchPopularMovies(page, language)
+    fun fetchPopularMovies(pageRequest: PageRequest, language: String) =
+        movieRepository.fetchPopularMovies(pageRequest, language)
             .onStart { emit(ResponseWrapper.Loading()) }
             .catch { emit(ResponseWrapper.Error(it)) }
 

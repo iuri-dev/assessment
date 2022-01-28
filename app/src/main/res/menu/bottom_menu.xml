@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/bottom_popular"
-        app:showAsAction="ifRoom"
-        android:checked="true"
+        android:id="@+id/moviesFragment"
         android:icon="@drawable/ic_movies"
         android:title="@string/movies" />
 
     <item
         android:id="@+id/bottom_trending"
-        app:showAsAction="ifRoom"
         android:icon="@drawable/ic_tv_season"
         android:title="@string/tv_season" />
 </menu>

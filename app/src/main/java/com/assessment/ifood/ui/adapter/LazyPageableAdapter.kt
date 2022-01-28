@@ -6,9 +6,8 @@ import com.assessment.ifood.domain.LoadType
 import com.assessment.ifood.domain.Paginated
 
 abstract class LazyPageableAdapter<T: RecyclerView.ViewHolder, R>(
-    private val pageSize: Int,
     private val thresholdLoading: Int,
-    private val loadNextPage: ((next: Int, pageSize: Int) -> Unit)
+    private val loadNextPage: ((next: Int) -> Unit)
 ): RecyclerView.Adapter<T>() {
 
     private var currentPage: Int = 1
@@ -26,7 +25,7 @@ abstract class LazyPageableAdapter<T: RecyclerView.ViewHolder, R>(
     }
 
     private fun onThresholdReached() {
-        loadNextPage.invoke(next ?: return, pageSize)
+        loadNextPage.invoke(next ?: return)
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
@@ -49,8 +48,8 @@ abstract class LazyPageableAdapter<T: RecyclerView.ViewHolder, R>(
         if (currentPage == page.totalPages || page.totalPages == 0)
             next = null
 
-        if (page.data.size <= 10 && currentPage == 1)
-            loadNextPage.invoke(next ?: return, pageSize)
+        if (page.data.size <= 15 && currentPage == 1)
+            loadNextPage.invoke(next ?: return)
     }
 
 }

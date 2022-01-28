@@ -19,5 +19,4 @@ data class Movie(
     val releaseDate: Date?
 ) {
     var voteShow = voteAverage.toString()
-    var formattedDate = releaseDate.toString()
 }

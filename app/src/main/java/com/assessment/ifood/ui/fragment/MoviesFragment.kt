@@ -1,4 +1,4 @@
-package com.assessment.ifood.ui
+package com.assessment.ifood.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,15 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.assessment.ifood.databinding.FragmentMoviesBinding
-import com.assessment.ifood.domain.Movie
-import com.assessment.ifood.domain.Paginated
-import com.assessment.ifood.domain.ResponseWrapper
+import com.assessment.ifood.domain.*
 import com.assessment.ifood.extensions.collectResult
 import com.assessment.ifood.extensions.setBlockState
-import com.assessment.ifood.ui.adapter.MoviesAdapter
+import com.assessment.ifood.ui.adapter.MoviesPageableAdapter
 import com.assessment.ifood.viewmodel.MovieViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -26,7 +25,9 @@ class MoviesFragment : Fragment() {
     private lateinit var binding: FragmentMoviesBinding
     private val viewModel by viewModels<MovieViewModel>()
 
-    private val moviesAdapter = MoviesAdapter(::onItemSelected)
+    private val moviesAdapter = MoviesPageableAdapter(::onLoadNext, ::onItemSelected)
+
+    val isLoading = MutableLiveData(false)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +45,22 @@ class MoviesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         lifecycleScope.launchWhenCreated {
-            viewModel.fetchPopularMovies(1, "pt-BR")
+            viewModel.fetchPopularMovies(PageRequest(1, LoadType.REFRESH), "pt-BR")
+                .collect(::collectMovies)
+        }
+    }
+
+    private fun onLoadNext(next: Int) {
+        if (this.isLoading.value == true) return
+        lifecycleScope.launch {
+            viewModel.fetchPopularMovies(PageRequest(next, LoadType.APPEND), "pt-BR")
                 .collect(::collectMovies)
         }
     }
 
     private fun collectMovies(result: ResponseWrapper<Paginated<Movie>>) =
-        collectResult(result, ::setLoading) { paginated ->
-            moviesAdapter.load(paginated)
-            viewModel.loadedMovies.value = paginated.data
+        collectResult(result, ::setLoading) { movies ->
+            moviesAdapter.load(movies)
         }
 
     private fun setupRecyclerView() {
@@ -69,6 +77,7 @@ class MoviesFragment : Fragment() {
     private fun setLoading(isLoading: Boolean) {
         //criar componente loading
         requireActivity().setBlockState(isLoading)
+        this.isLoading.postValue(isLoading)
     }
 
 }

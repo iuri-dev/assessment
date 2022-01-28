@@ -14,9 +14,9 @@ import com.assessment.ifood.extensions.toString
 import com.squareup.picasso.Picasso
 
 class MoviesPageableAdapter(
-    loadNextPage: ((next: Int, pageSize: Int) -> Unit),
+    loadNextPage: ((next: Int) -> Unit),
     val onClick: ((Movie) -> Unit)? = null
-) : LazyPageableAdapter<MoviesPageableAdapter.PageHolder, Movie>(1, 3, loadNextPage) {
+) : LazyPageableAdapter<MoviesPageableAdapter.PageHolder, Movie>(3, loadNextPage) {
     private val movies = mutableListOf<Movie>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = PageHolder(
@@ -24,7 +24,13 @@ class MoviesPageableAdapter(
     )
 
     override fun onBindViewHolder(holder: PageHolder, position: Int) {
-        holder.updateData(movies[position])
+        val movie = movies[position]
+        holder.binding.movie = movie
+        holder.binding.releaseDate = movie.releaseDate?.toString("dd/MM/yyyy")
+
+        Picasso.get()
+            .load(BuildConfig.API_IMAGE_URL + movie.posterPath)
+            .into(holder.binding.ivPoster)
     }
 
     override fun getItemCount() = movies.size
@@ -35,16 +41,6 @@ class MoviesPageableAdapter(
 
         init {
             view.setOnClickListener { onClick?.invoke(movie) }
-        }
-
-        fun updateData(item: Movie) {
-            movie = item
-            binding.movie = item
-            binding.releaseDate = item.releaseDate?.toString("dd/MM/yyyy")
-
-            Picasso.get()
-                .load(BuildConfig.API_IMAGE_URL + item.posterPath)
-                .into(binding.ivPoster)
         }
     }
 

@@ -1,14 +1,11 @@
 package com.assessment.ifood.data.repository.datasource
 
-import com.assessment.ifood.domain.Genre
-import com.assessment.ifood.domain.Movie
-import com.assessment.ifood.domain.Paginated
-import com.assessment.ifood.domain.ResponseWrapper
+import com.assessment.ifood.domain.*
 import kotlinx.coroutines.flow.Flow
 
 interface MovieDataSource {
     fun fetchPopularMovies(
-        page: Int,
+        pageRequest: PageRequest,
         language: String
     ): Flow<ResponseWrapper<Paginated<Movie>>>
 

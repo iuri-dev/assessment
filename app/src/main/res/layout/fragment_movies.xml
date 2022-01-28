@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.MoviesFragment">
+    tools:context=".ui.fragment.MoviesFragment">
 
     <data>
 
         <variable
             name="fragment"
-            type="com.assessment.ifood.ui.MoviesFragment" />
+            type="com.assessment.ifood.ui.fragment.MoviesFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
