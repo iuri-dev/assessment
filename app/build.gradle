@@ -1,0 +1,100 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
+}
+
+android {
+    compileSdk versions.compileSdk
+
+    defaultConfig {
+        applicationId "com.assessment.ifood"
+        minSdk versions.minSdk
+        targetSdk versions.targetSdk
+        versionCode versions.versionCode
+        versionName versions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            debuggable true
+            shrinkResources false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+
+            buildConfigField "String", "API_URL", '"https://api.themoviedb.org/"'
+            buildConfigField "String", "API_KEY", '"4e2c87e806e85b4e84cc4624b8db7c20"'
+
+            buildConfigField "String", "API_IMAGE_URL", '"https://image.tmdb.org/t/p/w342/"'
+        }
+
+        release {
+            shrinkResources true
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        dataBinding true
+        viewBinding true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    // Kotlin
+    implementation "androidx.core:core-ktx:${versions.coreKtx}"
+
+    // Support Libraries
+    implementation "androidx.appcompat:appcompat:${versions.appCompat}"
+    implementation "androidx.fragment:fragment-ktx:${versions.fragmentKtx}"
+
+    // Ui
+    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
+    implementation "androidx.recyclerview:recyclerview:${versions.recyclerview}"
+    implementation "androidx.cardview:cardview:${versions.cardview}"
+    implementation "com.squareup.picasso:picasso:${versions.picasso}"
+
+    // Material
+    implementation "com.google.android.material:material:${versions.material}"
+
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:${versions.coroutines}"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:${versions.coroutines}"
+
+    // Lifecycle
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:${versions.lifecycle}"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:${versions.lifecycle}"
+
+    // Navigation
+    implementation "androidx.navigation:navigation-fragment-ktx:${versions.navigation}"
+    implementation "androidx.navigation:navigation-ui-ktx:${versions.navigation}"
+
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
+    implementation "com.google.code.gson:gson:${versions.gson}"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:${versions.hilt}"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    kapt "com.google.dagger:hilt-android-compiler:${versions.hilt}"
+
+    testImplementation "junit:junit:${versions.junit}"
+    androidTestImplementation "androidx.test.ext:junit:${versions.extJunit}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+}

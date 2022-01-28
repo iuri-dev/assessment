@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Assessment</string>
+
+    <string name="movies">Movies</string>
+    <string name="tv_season">TV Seasons</string>
+
+    <string name="popular_movies">Popular Movies</string>
+
+    <string name="connection_error_general">Network error, please try again.</string>
+</resources>
