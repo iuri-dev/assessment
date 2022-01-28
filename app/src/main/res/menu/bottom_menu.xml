@@ -6,7 +6,7 @@
         android:title="@string/movies" />
 
     <item
-        android:id="@+id/bottom_trending"
+        android:id="@+id/tvSeasonFragment"
         android:icon="@drawable/ic_tv_season"
         android:title="@string/tv_season" />
 </menu>

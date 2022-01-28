@@ -23,6 +23,11 @@ class MovieViewModel @Inject constructor(
             .onStart { emit(ResponseWrapper.Loading()) }
             .catch { emit(ResponseWrapper.Error(it)) }
 
+    fun fetchPopularTvSeries(pageRequest: PageRequest, language: String) =
+        movieRepository.fetchPopularTvSeries(pageRequest, language)
+            .onStart { emit(ResponseWrapper.Loading()) }
+            .catch { emit(ResponseWrapper.Error(it)) }
+
     fun fetchGenres(language: String) =
         movieRepository.fetchGenres(language)
             .onStart { emit(ResponseWrapper.Loading()) }

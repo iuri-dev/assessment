@@ -25,11 +25,12 @@ class MoviesPageableAdapter(
 
     override fun onBindViewHolder(holder: PageHolder, position: Int) {
         val movie = movies[position]
+        holder.movie = movie
         holder.binding.movie = movie
         holder.binding.releaseDate = movie.releaseDate?.toString("dd/MM/yyyy")
 
         Picasso.get()
-            .load(BuildConfig.API_IMAGE_URL + movie.posterPath)
+            .load(BuildConfig.API_IMAGE_URL + movie.posterImage)
             .into(holder.binding.ivPoster)
     }
 

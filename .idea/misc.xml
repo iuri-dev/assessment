@@ -7,9 +7,12 @@
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/drawable/shape_rounded_card.xml" value="0.2203125" />
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/activity_movie.xml" value="0.20416666666666666" />
+        <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/fragment_movie_detail.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/fragment_movies.xml" value="0.20416666666666666" />
+        <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/fragment_tv_season.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/layout_error_snackbar.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/layout_movie_item.xml" value="0.25" />
+        <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/layout/layout_series_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Projetos/assessment/ifood-case/app/src/main/res/menu/bottom_menu.xml" value="0.20416666666666666" />
       </map>
     </option>

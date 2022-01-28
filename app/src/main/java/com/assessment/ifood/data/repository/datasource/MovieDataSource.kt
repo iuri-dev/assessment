@@ -9,5 +9,10 @@ interface MovieDataSource {
         language: String
     ): Flow<ResponseWrapper<Paginated<Movie>>>
 
+    fun fetchPopularTvSeries(
+        pageRequest: PageRequest,
+        language: String
+    ): Flow<ResponseWrapper<Paginated<TvSeries>>>
+
     fun fetchGenres(language: String): Flow<ResponseWrapper<List<Genre>>>
 }
