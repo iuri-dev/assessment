@@ -1,4 +1,4 @@
-# assessment mobile 
+# simple case
 
 App simples para listagem de filmes e séries - Utilizando Kotlin.
   - Arquitetura MVVM;
